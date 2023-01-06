@@ -42,32 +42,14 @@ export default function NavBar() {
                 className="p-1 font-normal text-gray-400"
             >
                 <Link href="#" className="flex items-center">
-                    Exchange
-                </Link>
-            </Typography>
-            <Typography
-                as="li"
-                variant="small"
-                className="p-1 font-normal text-gray-400"
-            >
-                <Link href="#" className="flex items-center">
-                    Future
-                </Link>
-            </Typography>
-            <Typography
-                as="li"
-                variant="small"
-                className="p-1 font-normal text-gray-400"
-            >
-                <Link href="#" className="flex items-center">
-                    Global
+                    Upload
                 </Link>
             </Typography>
         </ul>
     )
 
     return (
-        <Navbar className="mx-auto py-1 px-2 lg:px-8 lg:py-4 bg-gray-900">
+        <Navbar className="mx-auto py-1 px-2 lg:px-8 lg:py-4 bg-gray-900 border-0 fixed top-0 right-0 left-0">
             <div className="container mx-auto flex items-center justify-between text-gray-400">
                 <Typography
                     as="a"
@@ -75,7 +57,7 @@ export default function NavBar() {
                     variant="small"
                     className="mr-4 cursor-pointer py-1.5"
                 >
-                    <span className={raleway.className}>The Investor Dashboard</span>
+                    <span className={raleway.className}>The AI Hall</span>
                 </Typography>
                 <div className="hidden lg:block">{navList}</div>
                 <IconButton
