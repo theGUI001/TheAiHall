@@ -1,5 +1,7 @@
-export default function Home() {
+export default async function Home() {
   return (
-    <h1 className="text-3xl font-bold underline">Home Page</h1>
+    <div className="w-auto mx-2 my-2 ">
+      
+    </div>
   )
 }
