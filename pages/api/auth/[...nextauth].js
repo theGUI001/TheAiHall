@@ -12,14 +12,14 @@ export const authOptions = {
         CredentialsProvider({
             type: 'credentials',
             credentials: {},
-            authorize(credentials, req) {
+            authorize(credentials) {
                 const { email, password } = credentials
 
-                if (email !== 'teste@teste.com' || password !== '1234') {
+                if (email !== process.env.UP_USER || password !== process.env.UP_PASSWORD) {
                     throw new Error('Invalid Credentials')
                 }
 
-                return { id: '1', name: 'teste', email: 'teste@teste.com' }
+                return { id: '1', name: 'Upload Account' }
 
             }
         })
