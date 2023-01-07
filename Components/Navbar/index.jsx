@@ -32,7 +32,7 @@ export default function NavBar() {
                 variant="small"
                 className="p-1 font-normal text-gray-400"
             >
-                <Link href="#" className="flex items-center">
+                <Link href="/" className="flex items-center">
                     Home
                 </Link>
             </Typography>
@@ -41,7 +41,7 @@ export default function NavBar() {
                 variant="small"
                 className="p-1 font-normal text-gray-400"
             >
-                <Link href="#" className="flex items-center">
+                <Link href="/upload" className="flex items-center">
                     Upload
                 </Link>
             </Typography>
@@ -49,7 +49,7 @@ export default function NavBar() {
     )
 
     return (
-        <Navbar className="mx-auto py-1 px-2 lg:px-8 lg:py-4 bg-gray-900 border-0 fixed top-0 right-0 left-0">
+        <Navbar className="mx-auto py-1 px-2 lg:px-8 lg:py-4 bg-gray-900 border-0">
             <div className="container mx-auto flex items-center justify-between text-gray-400">
                 <Typography
                     as="a"
