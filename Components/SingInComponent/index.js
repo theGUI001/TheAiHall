@@ -24,11 +24,11 @@ export default function SignInComponent({ providers }) {
             <div className="px-7 py-6 shadow w-4/5 bg-gray-900 rounded-md flex flex-col gap-2 md:w-2/5">
                 <h1 className="text-center text-zinc-50 text-2xl mb-2">Log in</h1>
                 <TextBox
-                    lableText="َUser"
+                    labelText="َUser"
                     onChange={({ target }) => setUserInfo({ ...userInfo, email: target.value })}
                 />
                 <TextBox
-                    lableText="Password"
+                    labelText="Password"
                     type={"password"}
                     onChange={({ target }) => setUserInfo({ ...userInfo, password: target.value })}
                 />
