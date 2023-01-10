@@ -49,7 +49,7 @@ export default function NavBar() {
     )
 
     return (
-        <Navbar className="mx-auto py-1 px-2 lg:px-8 lg:py-4 bg-gray-900 border-0">
+        <Navbar id="navbar" className="mx-auto py-1 px-2 lg:px-8 lg:py-4 bg-gray-900 border-none" >
             <div className="container mx-auto flex items-center justify-between text-gray-400">
                 <Typography
                     as="a"
@@ -101,6 +101,6 @@ export default function NavBar() {
             <MobileNav open={openNav}>
                 {navList}
             </MobileNav>
-        </Navbar>
+        </Navbar >
     )
 }
