@@ -1,5 +1,5 @@
 import { getProviders } from "next-auth/react"
-import SignInComponent from "../../../Components/SingInComponent/idex"
+import SignInComponent from "../../../Components/SingInComponent/"
 
 async function SignInPage() {
     const providers = await getProviders()
