@@ -1,14 +1,9 @@
 import NextAuth from "next-auth"
-import DiscordProvider from "next-auth/providers/discord"
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions = {
     // Configure authentication providers
     providers: [
-        DiscordProvider({
-            clientId: process.env.DISCORD_CLIENT_ID,
-            clientSecret: process.env.DISCORD_CLIENT_SECRET
-        }),
         CredentialsProvider({
             type: 'credentials',
             credentials: {},
