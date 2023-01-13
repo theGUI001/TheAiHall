@@ -1,6 +1,7 @@
 import axios from 'axios'
 import formidable from 'formidable'
 const fs = require('fs');
+const sqlite3 = require('sqlite3').verbose();
 
 export const config = {
     api: {
@@ -9,26 +10,29 @@ export const config = {
 }
 
 export default async function Upload(req, res) {
+    // Verify if method is POST
     if (req.method != "POST") {
 
         res.status(405).send({ message: 'Only POST requests allowed' })
         return
     }
     else {
-
+        // Parse POST body with formidable
         const form = new formidable.IncomingForm()
         form.parse(req, async (err, fields, files) => {
 
+            // Log and return if error
             if (err) {
                 console.error(err)
                 res.status(500).json({ message: 'Error while parsing form data' })
                 return
             }
 
+            // Puts all input values into an object and reads binaries from the image
             const data = { filename: fields.name, author: fields.author, prompt: fields.prompt, ai: fields.ai }
             const file = fs.readFileSync(files.file.filepath)
             const date = new Date().toUTCString()
-
+            // Sets headers for send image to OCI bucket
             const config = {
                 headers: {
                     'date': date,
@@ -36,21 +40,28 @@ export default async function Upload(req, res) {
                 }
             }
 
-            axios.put(`https://objectstorage.sa-saopaulo-1.oraclecloud.com/p/QQT1bGO1KbQ_c0B2SEGE9_LgPGktkgPkq_0Deyeh7nvxG4xrdhjY3Dgx_Kp8DNv2/n/gr76az1mgnha/b/bucket-aihall/o/${data.filename}`, file, config)
-                .then(response => {
-                    console.log(response)
-                })
-                .catch(error => {
-                    console.log(error)
-                });
+            // Sends the image to OCI
+            let response = await axios.put(`https://objectstorage.sa-saopaulo-1.oraclecloud.com/p/${process.env.AUTH_OCI}/n/gr76az1mgnha/b/bucket-aihall/o/${data.filename}`, file, config)
+
+            if (response.status != 200) {
+                res.status(400).json({ message: 'ERROR UPLOADING IMAGE' })
+                return
+            }
+
+            // Inserts data to DB
+            const db = new sqlite3.Database('aihall.db');
+            const query = `INSERT INTO content (author, url, prompt, ia_name) VALUES ('${data.author}', '${data.filename}', '${data.prompt}', '${data.ai}')`
+            db.run(query, function (err) {
+                if (err) {
+                    res.status(400).json({ message: err })
+                    return
+                }
+            })
+            db.close();
 
         })
-        res.status(200).json({ message: 'dev' })
+        res.status(200).json({ message: 'uploaded' })
+        return
 
-
-        //! // Insert data to SQLite DB
-        //! const db = new sqlite3.Database('/aihall.db');
-        //! const query = `INSERT INTO content (id,author, prompt, ia_name) values (${id}, ${author}, ${prompt}, ${ai})`
-        //! db.run(query)
     }
 }

@@ -2,10 +2,11 @@
 import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { useState } from "react"
-import { redirect } from "next/dist/server/api-utils"
+import { useRouter } from "next/navigation"
 
 export default function Page() {
     const session = useSession()
+    const router = useRouter()
 
     const [imageInfo, setImageInfo] = useState({ author: "", prompt: "", ai: "" });
     const [file, setFile] = useState(null)
@@ -16,35 +17,40 @@ export default function Page() {
 
     async function handleSubmit(e) {
         e.preventDefault()
+        // Checks that all fields are filled in
         if (imageInfo.author != "" && imageInfo.prompt != "" && imageInfo.ai != "" && file != null) {
             let { author, prompt, ai } = imageInfo
+            //Sets an unique file name in OCI
             let imageName = `${new Date().valueOf()}_${file.name}`
             let payload = new FormData()
 
+            // Appends image and form data to payload
             payload.append('file', file)
             payload.append('name', imageName)
             payload.append('author', author)
             payload.append('prompt', prompt)
             payload.append('ai', ai)
 
+            // Sends data to API route 
             const upload = await fetch('/api/upload', {
                 method: 'POST',
                 body: payload
             })
-            let uploadRes = upload.json()
+            let uploadRes = await upload.json()
+
+            // Verifies if post was submitted correctly
             if (uploadRes.message == "uploaded") {
-                redirect('/')
+                // Redirect if sucess
+                router.push("/")
             } else {
-                alert("An error occurred while uploading, please try again later")
+                // Alerts if there are errors
+                alert("An error occurred while uploading, please try again later and check that all fields are filled in correctly")
             }
-
-
 
         } else {
             window.alert("Please fill in all fields before uploading")
         }
     }
-
 
     if (session) {
         return (
