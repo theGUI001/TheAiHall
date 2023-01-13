@@ -1,7 +1,7 @@
 import axios from 'axios'
 import formidable from 'formidable'
-const fs = require('fs');
-const sqlite3 = require('sqlite3').verbose();
+const fs = require('fs')
+const sqlite3 = require('sqlite3').verbose()
 
 export const config = {
     api: {
@@ -49,7 +49,7 @@ export default async function Upload(req, res) {
             }
 
             // Inserts data to DB
-            const db = new sqlite3.Database('aihall.db');
+            const db = new sqlite3.Database('aihall.db')
             const query = `INSERT INTO content (author, url, prompt, ia_name) VALUES ('${data.author}', '${data.filename}', '${data.prompt}', '${data.ai}')`
             db.run(query, function (err) {
                 if (err) {
@@ -57,7 +57,7 @@ export default async function Upload(req, res) {
                     return
                 }
             })
-            db.close();
+            db.close()
 
         })
         res.status(200).json({ message: 'uploaded' })
