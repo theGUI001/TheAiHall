@@ -24,8 +24,7 @@ export default async function Upload(req, res) {
             // Log and return if error
             if (err) {
                 console.error(err)
-                res.status(500).json({ message: 'Error while parsing form data' })
-                return
+                return res.status(500).json({ message: 'Error while parsing form data' })
             }
 
             // Puts all input values into an object and reads binaries from the image
@@ -44,24 +43,22 @@ export default async function Upload(req, res) {
             let response = await axios.put(`https://objectstorage.sa-saopaulo-1.oraclecloud.com/p/${process.env.AUTH_OCI}/n/gr76az1mgnha/b/bucket-aihall/o/${data.filename}`, file, config)
 
             if (response.status != 200) {
-                res.status(400).json({ message: 'ERROR UPLOADING IMAGE' })
-                return
+                return res.status(400).json({ message: 'ERROR UPLOADING IMAGE' })
             }
 
             // Inserts data to DB
             const db = new sqlite3.Database('aihall.db')
-            const query = `INSERT INTO content (author, url, prompt, ia_name) VALUES ('${data.author}', '${data.filename}', '${data.prompt}', '${data.ai}')`
+            const query = `INSERT INTO content (author, url, prompt, ia_name) VALUES ("${data.author}", "${data.filename}", "${data.prompt}", "${data.ai}")`
             db.run(query, function (err) {
                 if (err) {
-                    res.status(400).json({ message: err })
-                    return
+                    console.log(err)
+                    return res.status(400).json({ message: err })
+
+                } else {
+                    db.close()
+                    return res.status(200).json({ message: 'uploaded' })
                 }
             })
-            db.close()
-
         })
-        res.status(200).json({ message: 'uploaded' })
-        return
-
     }
 }
