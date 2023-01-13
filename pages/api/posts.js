@@ -6,7 +6,6 @@ export default function Posts(req, res) {
         if (err) {
             throw err;
         }
-        data = rows
         db.close()
         return res.status(200).json(rows)
     })
