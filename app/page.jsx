@@ -8,8 +8,8 @@ export default async function Home() {
 
   return (
     <div id={styles.plotarea} className="mx-2 my-4 justify-items-center">
-      {posts.map((post, key) => (
-        <Post image={post.url} author={post.author} prompt={post.prompt} key={key} />
+      {posts.map((post) => (
+        <Post image={post.url} author={post.author} prompt={post.prompt} key={post.id} />
       )
       )}
     </div >
