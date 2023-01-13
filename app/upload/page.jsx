@@ -19,6 +19,12 @@ export default function Page() {
         e.preventDefault()
         // Checks that all fields are filled in
         if (imageInfo.author != "" && imageInfo.prompt != "" && imageInfo.ai != "" && file != null) {
+
+            if (imageInfo.author.includes('"') || imageInfo.prompt.includes('"') || imageInfo.ai.includes('"')) {
+                window.alert('Please do not use (") character ')
+                return
+            }
+
             let { author, prompt, ai } = imageInfo
             //Sets an unique file name in OCI
             let imageName = `${new Date().valueOf()}_${file.name}`
