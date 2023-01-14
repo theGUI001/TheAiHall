@@ -1,10 +1,14 @@
 import styles from './home.module.css'
 import Post from "../Components/Post"
 
+async function getData() {
+  const src = await fetch(`${process.env.VERCEL_URL || "http://localhost:3000"}/api/posts`, { next: { revalidate: 2 } })
+  return src.json()
+}
+
 export default async function Home() {
 
-  const src = await fetch(`${process.env.VERCEL_URL || "http://localhost:3000"}/api/posts`)
-  const posts = await src.json()
+  const posts = await getData()
 
   return (
     <div id={styles.plotarea} className="mx-2 my-4 justify-items-center">
