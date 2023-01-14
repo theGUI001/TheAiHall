@@ -1,6 +1,6 @@
 import SignInComponent from "../../../Components/SingInComponent"
 
-async function SignInPage() {
+function SignInPage() {
     return (
         <div>
             <SignInComponent />
