@@ -27,9 +27,11 @@ export default function Register(req, res) {
                 return res.status(500).json({ message: 'Error while parsing form data' })
             }
 
+            // Sets username and encrypt password
             const username = fields.username
             const password = await bcrypt.hash(fields.pswd, 10)
 
+            // Verifies if user already exists
             let db = new sqlite3.Database('aihall.db')
             db.all(`SELECT id FROM users WHERE username=?`, [username], (err, rows) => {
                 if (err) {
@@ -43,6 +45,7 @@ export default function Register(req, res) {
                     return res.status(400).json({ message: 'User already exists' })
                 }
 
+                // Insert user into db
                 db.all(`INSERT INTO users (username, password) VALUES (?,?)`, [username, password], (err, rows) => {
                     if (err) {
                         throw err

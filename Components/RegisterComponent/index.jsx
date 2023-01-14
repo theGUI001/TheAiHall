@@ -10,13 +10,17 @@ export default function RegisterComponent() {
 
     async function handleSubmit(e) {
         e.preventDefault()
+        // Sets new payload
         const payload = new FormData()
+        // Append to payload user and password values
         payload.append('username', userInfo.email)
         payload.append('pswd', userInfo.password)
+        // Send payload to API route
         const register = await fetch('/api/register', {
             method: 'POST',
             body: payload
         })
+        // Verifies if user was created
         let res = await register.json()
         if (res.message == "Success") {
             router.push('/auth/signin')
