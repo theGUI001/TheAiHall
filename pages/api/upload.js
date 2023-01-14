@@ -39,6 +39,10 @@ export default async function Upload(req, res) {
                 }
             }
 
+            if (!files.file.mimetype.startsWith('image/')) {
+                return res.status(400).json({ message: 'Invalid Image' })
+            }
+
             // Sends the image to OCI
             let response = await axios.put(`https://objectstorage.sa-saopaulo-1.oraclecloud.com/p/${process.env.AUTH_OCI}/n/gr76az1mgnha/b/bucket-aihall/o/${data.filename}`, file, config)
 
