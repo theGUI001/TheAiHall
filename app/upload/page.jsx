@@ -70,6 +70,7 @@ export default function Page() {
                         onChange={({ target }) => setImageInfo({ ...imageInfo, author: target.value })}
                         required
                         autoFocus
+                        className="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white mb-3"
                         name="author"
                     >
                     </input>
@@ -79,6 +80,7 @@ export default function Page() {
                         placeholder="Prompt"
                         onChange={({ target }) => setImageInfo({ ...imageInfo, prompt: target.value })}
                         required
+                        className="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white mb-3"
                         name="prompt"
                     >
                     </input>
@@ -89,12 +91,19 @@ export default function Page() {
                         onChange={({ target }) => setImageInfo({ ...imageInfo, ai: target.value })}
                         required
                         name="ai"
+                        className="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white mb-3"
                     >
                     </input>
                     <span className="text-gray-300">Choose your image</span>
                     <input
                         type="file"
-                        className="text-gray-300"
+                        className="text-sm text-grey-500 rounded-lg text-gray-400 placeholder-gray-400 focus:outline-none
+                        file:mr-5 file:py-2 file:px-6 bg-gray-700
+                        file:rounded-lg file:border-0
+                        file:text-sm file:font-medium
+                        file:bg-gray-600 file:text-white
+                        hover:file:cursor-pointer hover:file:bg-gray-500 mb-3"
+                        accept=".png, .jpg, .jpeg"
                         onChange={handleChange}
                         required
                         name="file"
@@ -102,7 +111,7 @@ export default function Page() {
                     </input>
                     <button
                         type="submit"
-                        className="text-white mt-4 self-end bg-sky-500 rounded-xl w-32 leading-9"
+                        className="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
                     > Upload</button>
                 </form>
             </div >
