@@ -16,7 +16,6 @@ export default function SignInComponent() {
             password: userInfo.password,
             callbackUrl: `${process.env.VERCEL_URL || "http://localhost:3000"}/upload`
         })
-        console.log(res)
     }
 
     return (
