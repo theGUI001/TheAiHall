@@ -2,9 +2,9 @@ import SignInComponent from "../../../Components/SingInComponent"
 
 function SignInPage() {
     return (
-        <div>
+        <main>
             <SignInComponent />
-        </div>
+        </main>
     )
 }
 

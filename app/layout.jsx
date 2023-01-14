@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       <body className='bg-gray-800'>
 
         <NavBar className="absolute top-0 right-0 left-0" />
-        <main>{children}</main>
+        {children}
         <footer className="p-4 shadow md:flex md:items-center md:justify-between md:p-6 bg-gray-900 bottom-0 left-0 right-0" id='footer'>
           <span className="text-sm sm:text-center text-gray-400">
             <Link href="/">The AI Hall</Link>. Made as CS50 2023 final project.

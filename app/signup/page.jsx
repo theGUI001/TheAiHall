@@ -2,8 +2,8 @@ import RegisterComponent from "../../Components/RegisterComponent"
 
 export default function Signup() {
     return (
-        <div>
+        <main>
             < RegisterComponent />
-        </div>
+        </main>
     )
 }
