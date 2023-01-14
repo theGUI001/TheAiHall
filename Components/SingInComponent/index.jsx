@@ -14,7 +14,7 @@ export default function SignInComponent() {
         const res = await signIn('credentials', {
             email: userInfo.email,
             password: userInfo.password,
-            callbackUrl: "http://localhost:3000/upload"
+            callbackUrl: `${process.env.VERCEL_URL || "http://localhost:3000"}/upload`
         })
         console.log(res)
     }
