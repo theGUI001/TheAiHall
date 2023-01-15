@@ -1,4 +1,4 @@
-import styles from './home.module.css'
+import styles from '../styles/home.module.css'
 import Post from "../Components/Post"
 import Link from 'next/link'
 import { Suspense } from 'react'

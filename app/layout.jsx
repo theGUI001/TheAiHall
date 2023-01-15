@@ -1,4 +1,5 @@
-import './globals.css'
+import '../styles/main.css'
+import '../styles/build.css'
 import { Roboto } from '@next/font/google'
 import Link from 'next/link'
 import NavBar from '../Components/Navbar'
