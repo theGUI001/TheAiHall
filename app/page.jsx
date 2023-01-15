@@ -3,7 +3,7 @@ import Post from "../Components/Post"
 import Link from 'next/link'
 import { Suspense } from 'react'
 const sqlite3 = require('sqlite3').verbose()
-import { headers } from 'next/headers';
+import { headers } from 'next/headers'
 
 async function getData() {
   // Connect to db
@@ -25,7 +25,9 @@ async function getData() {
 export default async function Home() {
   const posts = await getData()
   const makeSSG = headers()
-  console.log(makeSSG)
+  if (makeSSG) {
+    console.log("Home visited")
+  }
 
   return (
     <main>
