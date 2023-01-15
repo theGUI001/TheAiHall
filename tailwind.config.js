@@ -7,7 +7,10 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: ["postcss-import",
-    "tailwindcss",
-    "autoprefixer"],
-}
+  plugins: [
+    {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  ],
+};
