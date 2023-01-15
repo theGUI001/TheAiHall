@@ -4,8 +4,6 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 const sqlite3 = require('sqlite3').verbose()
 
-export const revalidate = 2
-
 async function getData() {
   // Connect to db
   let db = new sqlite3.Database('aihall.db')

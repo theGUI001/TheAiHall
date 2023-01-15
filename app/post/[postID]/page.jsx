@@ -1,8 +1,6 @@
 const sqlite3 = require('sqlite3').verbose()
 import DetailsPost from "../../../Components/DetailsPost"
 
-export const revalidate = 2
-
 async function getData(id) {
     // Connect to db
     let db = new sqlite3.Database('aihall.db')
